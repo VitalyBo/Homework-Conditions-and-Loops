@@ -1,9 +1,8 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,163 +11,120 @@ namespace Сonsole
 {
     class Program
     {
+
         static void Main(string[] args)
         {
-            Console.OutputEncoding = Encoding.Unicode;
-
-
-            while (true)
-            {
-                int choice = 0;
-
-                Console.WriteLine("\nChoose what you want: \n1.Task: Write a program to take an " +
-                    "integer input from the user. Determine if the number is positive, negative," +
-                    " or zero.Display the result.\n2.Write a program to take three different " +
-                    "numbers as input. Determine the largest of the three numbers and display it.\n3." +
-                    "Write a program that takes an alphabet as input. Check whether the input is a " +
-                    "vowel (a, e, i, o, u) or a consonant.\n4.Write a program to print the" +
-                    "multiplication table of a given number up to 10.Ask the user for a " +
-                    "number, then print out the related multiplication table.\n5.Write a program to " +
-                    "determine if a given number is a prime number (a number only divisible by " +
-                    "1 and itself).\n6.Write a program that prints the numbers from 1 to 100." +
-                    "However:\n\nFor multiples of three, print \"Fizz\" instead of the number." +
-                    "\r\nFor multiples of five, print \"Buzz\".\r\nFor numbers that are multiples " +
-                    "of both three and five, print \"FizzBuzz\".\n7.Exit from program");
-                Console.WriteLine("\nChoose and put number from 1 to 7");
-
-                choice = int.Parse(Console.ReadLine());
-
-
-
-                if (choice == 1)
-                {
-
-                    Console.WriteLine("1. Write a program to take an integer input from the user. " +
-                        "Determine if the number is positive, negative, or zero. " +
-                        "Display the result.");
-                    
-                    int number =int.Parse(Console.ReadLine());
-                    if (number >= 0) Console.WriteLine("Positive");
-                    else Console.WriteLine("Negative");
-                    Console.ReadLine();
-                    continue;
-                }
-
-                if (choice == 2)
-                {
-                    Console.WriteLine("2. Write a program to take three different numbers as input." +
-                        " Determine the largest of the three numbers and display it.");
-                    int number_1=0, number_2=0, number_3=0;
-                    Console.WriteLine("Type number 1:");
-                    number_1 = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Type number 2:");
-                    number_2 = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Type number 3:");
-                    number_2 = int.Parse(Console.ReadLine());
-
-                    if ((number_1 > number_2) && (number_1 > number_3))
-                    { Console.WriteLine($"The largest number is: {number_1}"); }
-                    else if ((number_2 > number_1) && (number_2 > number_3))
-                    { Console.WriteLine($"The largest number is: {number_2}"); }
-                    else
-                    { Console.WriteLine($"The largest number is: {number_3}"); }
-                    Console.ReadLine();
-                    continue;
-                }
-
-                if (choice == 3)
-                {
-                    Console.WriteLine("Write a program that takes an alphabet as input. Check " +
-                        "whether the input is a vowel (a, e, i, o, u) or a consonant.");
-                    Console.WriteLine("Enter a letter: ");
-                    char letter = Convert.ToChar(Console.ReadLine());
-
-                    letter = Char.ToLower(letter);
-
-                    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u')
-                    {
-                        Console.WriteLine("The entered alphabet is a vowel.");
-                    }
-                    else if ((letter >= 'a' && letter <= 'z') && !(letter == 'y'))
-                    {
-                        Console.WriteLine("The entered alphabet is a consonant.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. Please enter a valid alphabet.");
-                    }
-
-                    Console.ReadLine();
-                }
-
-                if (choice == 4)
-                {
-                    Console.WriteLine("Write a program to print the multiplication table of a " +
-                        "given number up to 10.\nAsk the user for a number, then print " +
-                        "out the related multiplication table.");
-
-                    Console.WriteLine("Please put some number: ");
-                    int number = int.Parse(Console.ReadLine());
-                    for (int i = 1; i < 11; i++)
-                    {
-                        Console.WriteLine($"{i}*{number}={(i * number)}");
-                    }
-                }
-
-
-                if (choice == 5)
-                {
-                    Console.WriteLine("Write a program to determine if a given number is a " +
-                        "prime number (a number only divisible by 1 and itself).");
-                    {
-                        Console.WriteLine("Enter a number: ");
-                        int number = int.Parse(Console.ReadLine());
-                        bool isPrime = IsPrime(number);
-                        if (isPrime) { Console.WriteLine(number + " is a prime number."); }
-                        else { Console.WriteLine(number + " is not a prime number."); }
-                        Console.ReadLine();
-                    }
-
-                    static bool IsPrime(int num)
-                    {
-                        if (num <= 1) { return false; }
                         
-                        for (int i = 2; i <= Math.Sqrt(num); i++)
-                        {
-                            if (num % i == 0) { return false; }
-                        }
-                       return true;
-                    }
-                }
+            Console.OutputEncoding = Encoding.Unicode;
+            bool condition = true;
+            Console.WriteLine("\nVitalii Bobyr - 05/13/24");
+            Console.WriteLine("Programming 120 - Code Practice - Booleans and Conditions");
+        #region start_of_prog
+        start:
+            while (condition)
+            {
+                Console.WriteLine("\r\n1.Check the temperature\n2.Check Odd or Even\n3.Leap Year Checker\ne.Exit");
+                Console.WriteLine("Choose what you want and put some number from 1 to 4");
+                string choice;
+                choice = Console.ReadLine().ToLower();
 
-                if (choice==6)
+                try
                 {
-                    Console.WriteLine("Write a program that prints the numbers from 1 to 100. " +
-                        "However:\nFor multiples of three, print \"Fizz\" instead of the number." +
-                        "\nFor multiples of five, print \"Buzz\".\r\nFor numbers that are multiples " +
-                        "of both three and five, print \"FizzBuzz\".");
-
-                    Console.WriteLine("Enter a number: ");
-                    int number = int.Parse(Console.ReadLine());
-
-                    for (int i = 1; i <= number; i++)
+                    switch (choice)
                     {
-                        if (i % 3 == 0 && i % 5 == 0) { Console.WriteLine("FizzBuzz"); }
-                        else if (i % 3 == 0) { Console.WriteLine("Fizz"); }
-                        else if (i % 5 == 0) { Console.WriteLine("Buzz"); }
-                        else Console.WriteLine(i);
+                        #region task_1
+                        case "1":
+                            Console.WriteLine("Check the temperature");
+                            Console.Write("Put some number: ");
+                            int number = int.Parse(Console.ReadLine());
+                            Weather weather = new Weather();
+                            weather.display_temperature(number);
+                            goto start;
+                        #endregion
+                        #region task_2
+                        case "2":
+                            Console.WriteLine("Check Odd or Even");
+                            odd_or_even odd_Or_Even = new odd_or_even();
+                            Console.Write("Put some number: ");
+                            int numb = int.Parse(Console.ReadLine());
+                            try
+                            {
+                                odd_Or_Even.display_odd_or_even(numb);
+                            }
+                            catch
+                            {
+                                Console.WriteLine("Invalid input. Please enter a valid integer.");
+                                goto start;
+                            }
+                            goto start;
+                        #endregion
+                        #region task_3
+                        case "3":
+                            Console.WriteLine("Leap Year Checker");
+                            Console.Write("Put some year: ");
+                            int year = int.Parse(Console.ReadLine());
+                            if (IsLeapYear(year))
+                            {
+                                Console.WriteLine($"{year} is a leap year.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{year} is not a leap year.");
+                            }
+                            goto start;
+                        #endregion
+
+                        case "e":
+                            Console.WriteLine("Exit from progarm");
+                            condition = false;
+                            break;
+
                     }
-                    Console.ReadLine();
+
                 }
-
-
-
-                if (choice == 7)
+                catch
                 {
-                    Console.WriteLine("Thanks that you use our program!");
-                    break;
+                    Console.WriteLine("Something going wrong! Please try again!");
+                    goto start;
                 }
+
+            }
+            #endregion end_of_prog
+
+        }
+
+
+        #region classes_and_methods
+        public class Weather
+        { 
+                   public void display_temperature(int temperature)
+                   {
+                     if (temperature <= 32) {Console.WriteLine ("That's freezing, be careful out there."); }
+                     if (temperature >= 33 &&  temperature <= 50) { Console.WriteLine("It's really cold out, bring a jacket."); }
+                     if (temperature >= 51 && temperature <= 68) { Console.WriteLine("It's starting to get cold. A sweater should work"); }
+                     if (temperature >= 69 && temperature <= 75) { Console.WriteLine("It's comfortable out. A shirt and jeans will work"); }
+                     if (temperature >= 76) { Console.WriteLine("It's T-shirt and shorts time"); }
+                   }
+        }
+
+        public class odd_or_even
+        {
+            public void display_odd_or_even (int number)
+            {                   
+                    if (number % 2 == 0) { Console.WriteLine("The number is even."); }
+                    else { Console.WriteLine("The number is odd."); }
             }
         }
+
+        static bool IsLeapYear(int year)
+        {
+             if (year % 400 == 0) { return true; }
+             if (year % 100 == 0) { return false; }
+             if (year % 4 == 0) { return true; }
+             return false;
+        }
     }
+
+    #endregion
 }
+
